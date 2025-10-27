@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       // Send email via Resend
       const { data: emailData, error: emailError } = await resend.emails.send({
         from: 'onboarding@resend.dev', // Resend'in test domain'i
-        to: 'guleryapiproje@gmail.com',
+        to: 'kemalglrr@gmail.com', // TEST: Senin mailine git
         subject: emailSubject,
         html: emailHtml,
       })
