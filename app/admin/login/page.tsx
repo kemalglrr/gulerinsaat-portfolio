@@ -8,6 +8,7 @@ import { z } from 'zod'
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import { Lock, Mail, LogIn, Building2 } from 'lucide-react'
+import Image from 'next/image'
 
 const loginSchema = z.object({
   email: z.string().email('Geçerli bir email adresi giriniz'),
@@ -59,8 +60,14 @@ export default function LoginPage() {
         {/* Logo / Başlık */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="w-16 h-16 bg-orange-600 rounded-xl flex items-center justify-center">
-              <Building2 className="w-9 h-9 text-white" />
+            <div className="w-16 h-16 bg-orange-600 rounded-xl flex items-center justify-center overflow-hidden">
+              <Image
+                src="/logo.png"
+                alt="Güler Yapı Proje Logo"
+                width={64}
+                height={64}
+                className="object-contain"
+              />
             </div>
           </div>
           <h1 className="text-4xl font-bold mb-2 text-gray-900">

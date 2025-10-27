@@ -12,6 +12,7 @@ import {
   LayoutDashboard,
   FolderOpen
 } from 'lucide-react'
+import Image from 'next/image'
 import ProjectList from './components/ProjectList'
 import ProjectFormModal from './components/ProjectFormModal'
 
@@ -137,8 +138,14 @@ export default function AdminDashboard() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center">
-                <Building2 className="w-7 h-7 text-white" />
+              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center overflow-hidden">
+                <Image
+                  src="/logo.png"
+                  alt="Güler Yapı Proje Logo"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                />
               </div>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">GÜLER YAPI PROJE</h1>

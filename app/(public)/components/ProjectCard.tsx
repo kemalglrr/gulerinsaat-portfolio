@@ -68,7 +68,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
       onClick={onClick}
       className="cursor-pointer group h-full"
     >
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:border-orange-600 hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 h-full flex flex-col">
         {/* Proje Görseli */}
         <div className="relative aspect-video overflow-hidden bg-slate-100">
           {project.thumbnail ? (
