@@ -1,7 +1,7 @@
 'use client'
 
 import { ProjectWithMedia } from '@/lib/types/database'
-import { MapPin, Image as ImageIcon, Video } from 'lucide-react'
+import { MapPin, Image as ImageIcon, Video, Clock, CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 
 interface ProjectCardProps {
@@ -12,6 +12,56 @@ interface ProjectCardProps {
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   const imageCount = project.media?.filter(m => m.media_type === 'image').length || 0
   const videoCount = project.media?.filter(m => m.media_type === 'video').length || 0
+  
+  // Proje durumu hesaplama
+  const getProjectStatus = () => {
+    if (!project.start_date) return null
+    
+    const startDate = new Date(project.start_date)
+    const endDate = project.end_date ? new Date(project.end_date) : null
+    
+    if (endDate) {
+      // Tamamlandı - Süre hesapla
+      const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + 
+                     (endDate.getMonth() - startDate.getMonth())
+      
+      let duration = ''
+      if (months >= 12) {
+        const years = Math.floor(months / 12)
+        const remainingMonths = months % 12
+        duration = years > 0 ? `${years} yıl` : ''
+        if (remainingMonths > 0) {
+          duration += (duration ? ' ' : '') + `${remainingMonths} ay`
+        }
+      } else if (months > 0) {
+        duration = `${months} ay`
+      } else {
+        duration = '1 aydan kısa'
+      }
+      
+      return {
+        type: 'completed' as const,
+        label: 'Tamamlandı',
+        duration,
+        icon: CheckCircle2,
+        bgColor: 'bg-green-50',
+        textColor: 'text-green-700',
+        borderColor: 'border-green-200',
+      }
+    }
+    
+    // Devam ediyor
+    return {
+      type: 'ongoing' as const,
+      label: 'Devam Ediyor',
+      icon: Clock,
+      bgColor: 'bg-blue-50',
+      textColor: 'text-blue-700',
+      borderColor: 'border-blue-200',
+    }
+  }
+  
+  const projectStatus = getProjectStatus()
   
   return (
     <div 
@@ -36,6 +86,23 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Status Badge */}
+          {projectStatus && (
+            <div className={`absolute top-3 right-3 px-3 py-1.5 ${projectStatus.bgColor} ${projectStatus.borderColor} border-2 rounded-full backdrop-blur-sm flex items-center gap-1.5`}>
+              <projectStatus.icon className={`w-4 h-4 ${projectStatus.textColor}`} />
+              <div className="flex flex-col">
+                <span className={`${projectStatus.textColor} text-xs font-semibold leading-tight`}>
+                  {projectStatus.label}
+                </span>
+                {projectStatus.type === 'completed' && projectStatus.duration && (
+                  <span className={`${projectStatus.textColor} text-[10px] font-medium leading-tight`}>
+                    {projectStatus.duration}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Proje Bilgileri */}

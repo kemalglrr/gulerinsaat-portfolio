@@ -15,7 +15,8 @@ export interface Database {
           title: string
           description: string | null
           location: string | null
-          completion_date: string | null
+          start_date: string | null
+          end_date: string | null
           display_order: number
           is_published: boolean
           created_at: string
@@ -26,7 +27,8 @@ export interface Database {
           title: string
           description?: string | null
           location?: string | null
-          completion_date?: string | null
+          start_date?: string | null
+          end_date?: string | null
           display_order?: number
           is_published?: boolean
           created_at?: string
@@ -37,7 +39,8 @@ export interface Database {
           title?: string
           description?: string | null
           location?: string | null
-          completion_date?: string | null
+          start_date?: string | null
+          end_date?: string | null
           display_order?: number
           is_published?: boolean
           created_at?: string

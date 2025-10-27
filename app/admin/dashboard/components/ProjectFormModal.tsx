@@ -33,6 +33,8 @@ const projectSchema = z.object({
   title: z.string().min(2, 'Proje adı en az 2 karakter olmalıdır'),
   description: z.string().optional(),
   location: z.string().optional(),
+  start_date: z.string().optional(),
+  end_date: z.string().optional(),
   is_published: z.boolean(),
 })
 
@@ -142,6 +144,8 @@ export default function ProjectFormModal({
       title: project?.title || '',
       description: project?.description || '',
       location: project?.location || '',
+      start_date: project?.start_date || '',
+      end_date: project?.end_date || '',
       is_published: project?.is_published ?? true,
     },
   })
@@ -296,6 +300,8 @@ export default function ProjectFormModal({
             title: data.title,
             description: data.description,
             location: data.location,
+            start_date: data.start_date || null,
+            end_date: data.end_date || null,
             is_published: data.is_published,
           })
           .eq('id', project.id)
@@ -309,6 +315,8 @@ export default function ProjectFormModal({
               title: data.title,
               description: data.description,
               location: data.location,
+              start_date: data.start_date || null,
+              end_date: data.end_date || null,
               is_published: data.is_published,
               display_order: 0,
             },
@@ -495,6 +503,30 @@ export default function ProjectFormModal({
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent"
                 placeholder="Örn: Ankara, Türkiye"
               />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-gray-700 mb-2 font-medium">
+                  Başlangıç Tarihi
+                </label>
+                <input
+                  {...register('start_date')}
+                  type="date"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label className="block text-gray-700 mb-2 font-medium">
+                  Bitiş Tarihi
+                </label>
+                <input
+                  {...register('end_date')}
+                  type="date"
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent"
+                />
+              </div>
             </div>
 
             <div className="flex items-center gap-3">
