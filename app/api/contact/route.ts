@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
     try {
       // Send email via Resend
       const { data: emailData, error: emailError } = await resend.emails.send({
-        from: 'Güler Yapı Proje <noreply@gulerinsaat.org>', // Bu adresi Resend'de doğrulaman gerekecek
+        from: 'onboarding@resend.dev', // Resend'in test domain'i
         to: 'guleryapiproje@gmail.com',
         subject: emailSubject,
         html: emailHtml,
