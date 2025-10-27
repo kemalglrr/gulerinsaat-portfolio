@@ -91,16 +91,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
           {projectStatus && (
             <div className={`absolute top-3 right-3 px-3 py-1.5 ${projectStatus.bgColor} ${projectStatus.borderColor} border-2 rounded-full backdrop-blur-sm flex items-center gap-1.5`}>
               <projectStatus.icon className={`w-4 h-4 ${projectStatus.textColor}`} />
-              <div className="flex flex-col">
-                <span className={`${projectStatus.textColor} text-xs font-semibold leading-tight`}>
-                  {projectStatus.label}
-                </span>
-                {projectStatus.type === 'completed' && projectStatus.duration && (
-                  <span className={`${projectStatus.textColor} text-[10px] font-medium leading-tight`}>
-                    {projectStatus.duration}
-                  </span>
-                )}
-              </div>
+              <span className={`${projectStatus.textColor} text-xs font-semibold leading-tight`}>
+                {projectStatus.label}
+              </span>
             </div>
           )}
         </div>

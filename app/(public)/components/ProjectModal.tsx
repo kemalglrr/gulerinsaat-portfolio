@@ -34,6 +34,32 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     setLightboxOpen(true)
   }
 
+  // Proje süresini hesapla
+  const getProjectDuration = () => {
+    if (!project.start_date || !project.end_date) return null
+    
+    const startDate = new Date(project.start_date)
+    const endDate = new Date(project.end_date)
+    
+    // Toplam gün farkı
+    const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+    
+    // Yıl, ay, gün hesaplama
+    const years = Math.floor(totalDays / 365)
+    const remainingDaysAfterYears = totalDays % 365
+    const months = Math.floor(remainingDaysAfterYears / 30)
+    const days = remainingDaysAfterYears % 30
+    
+    let durationText = ''
+    if (years > 0) durationText += `${years} yıl `
+    if (months > 0) durationText += `${months} ay `
+    if (days > 0) durationText += `${days} gün `
+    
+    return durationText.trim() + ' sürede tamamlandı'
+  }
+
+  const projectDuration = getProjectDuration()
+
   return (
     <>
       <div 
@@ -57,10 +83,17 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     <span>{project.location}</span>
                   </div>
                 )}
-                {mounted && project.created_at && (
-                  <div className="flex items-center gap-1">
+                {mounted && project.start_date && project.end_date && (
+                  <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>{new Date(project.created_at).toLocaleDateString('tr-TR')}</span>
+                    <span>
+                      {new Date(project.start_date).toLocaleDateString('tr-TR')} - {new Date(project.end_date).toLocaleDateString('tr-TR')}
+                    </span>
+                    {projectDuration && (
+                      <span className="ml-2 px-2 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">
+                        {projectDuration}
+                      </span>
+                    )}
                   </div>
                 )}
               </div>
