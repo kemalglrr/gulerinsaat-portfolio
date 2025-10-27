@@ -34,11 +34,20 @@ export default function Contact() {
     setIsSubmitting(true)
     
     try {
-      const { error } = await supabase
-        .from('contact_messages')
-        .insert([data])
+      // Send to API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-      if (error) throw error
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Bir hata oluştu')
+      }
 
       toast.success('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.')
       reset()
