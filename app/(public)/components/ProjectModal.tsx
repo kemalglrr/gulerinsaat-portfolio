@@ -36,10 +36,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
 
   // Proje süresini hesapla
   const getProjectDuration = () => {
-    if (!project.start_date || !project.end_date) return null
+    if (!project.start_date) return null
     
     const startDate = new Date(project.start_date)
-    const endDate = new Date(project.end_date)
+    const endDate = project.end_date ? new Date(project.end_date) : new Date() // Devam ediyorsa bugüne kadar
     
     // Toplam gün farkı
     const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
@@ -55,7 +55,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     if (months > 0) durationText += `${months} ay `
     if (days > 0) durationText += `${days} gün `
     
-    return durationText.trim() + ' sürede tamamlandı'
+    // Tamamlandı mı yoksa devam ediyor mu?
+    const suffix = project.end_date ? 'sürede tamamlandı' : 'süredir devam ediyor'
+    
+    return durationText.trim() + ' ' + suffix
   }
 
   const projectDuration = getProjectDuration()
@@ -83,14 +86,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                     <span>{project.location}</span>
                   </div>
                 )}
-                {mounted && project.start_date && project.end_date && (
+                {mounted && project.start_date && (
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
                     <span>
-                      {new Date(project.start_date).toLocaleDateString('tr-TR')} - {new Date(project.end_date).toLocaleDateString('tr-TR')}
+                      {new Date(project.start_date).toLocaleDateString('tr-TR')} - {project.end_date ? new Date(project.end_date).toLocaleDateString('tr-TR') : ''}
                     </span>
                     {projectDuration && (
-                      <span className="ml-2 px-2 py-1 bg-green-50 text-green-700 text-xs font-semibold rounded-full">
+                      <span className={`ml-2 px-2 py-1 ${project.end_date ? 'bg-green-50 text-green-700' : 'bg-blue-50 text-blue-700'} text-xs font-semibold rounded-full`}>
                         {projectDuration}
                       </span>
                     )}
