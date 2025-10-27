@@ -50,15 +50,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     const months = Math.floor(remainingDaysAfterYears / 30)
     const days = remainingDaysAfterYears % 30
     
+    // Devam ediyor mu yoksa tamamlandı mı?
+    const isCompleted = !!project.end_date
+    
     let durationText = ''
-    if (years > 0) durationText += `${years} yıl `
-    if (months > 0) durationText += `${months} ay `
-    if (days > 0) durationText += `${days} gün `
     
-    // Tamamlandı mı yoksa devam ediyor mu?
-    const suffix = project.end_date ? 'sürede tamamlandı' : 'süredir devam ediyor'
+    if (isCompleted) {
+      // Tamamlanan projeler: "X yıl Y ay Z gün sürede tamamlandı"
+      if (years > 0) durationText += `${years} yıl `
+      if (months > 0) durationText += `${months} ay `
+      if (days > 0) durationText += `${days} gün `
+      durationText += 'sürede tamamlandı'
+    } else {
+      // Devam eden projeler: "X yıl Y ay Z gündür devam ediyor"
+      if (years > 0) durationText += `${years} yıl `
+      if (months > 0) durationText += `${months} ay `
+      if (days > 0) durationText += `${days} gündür `
+      durationText += 'devam ediyor'
+    }
     
-    return durationText.trim() + ' ' + suffix
+    return durationText.trim()
   }
 
   const projectDuration = getProjectDuration()
