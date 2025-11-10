@@ -5,6 +5,7 @@ import { X, MapPin, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import Lightbox from 'yet-another-react-lightbox'
+import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 import 'yet-another-react-lightbox/styles.css'
 
 interface ProjectModalProps {
@@ -194,6 +195,18 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           close={() => setLightboxOpen(false)}
           slides={lightboxSlides}
           index={lightboxIndex}
+          plugins={[Zoom]}
+          zoom={{
+            maxZoomPixelRatio: 3,
+            zoomInMultiplier: 2,
+            doubleTapDelay: 300,
+            doubleClickDelay: 300,
+            doubleClickMaxStops: 2,
+            keyboardMoveDistance: 50,
+            wheelZoomDistanceFactor: 100,
+            pinchZoomDistanceFactor: 100,
+            scrollToZoom: true,
+          }}
         />
       )}
     </>
