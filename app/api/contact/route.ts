@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     `
 
     const { error: emailError } = await resend.emails.send({
-      from: 'Güler Yapı Proje <noreply@send.gulerinsaat.org>',
+      from: 'Güler Yapı Proje <noreply@gulerinsaat.org>',
       to: 'guleryapiproje@gmail.com',
       replyTo: email,
       subject: emailSubject,
