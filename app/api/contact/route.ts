@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { z } from 'zod'
+
+const contactSchema = z.object({
+  name: z.string().min(2).max(100),
+  email: z.string().email().max(200),
+  phone: z.string().max(30).optional(),
+  message: z.string().min(10).max(5000),
+})
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,14 +22,14 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(apiKey)
 
     const body = await request.json()
-    const { name, email, phone, message } = body
-
-    if (!name || !email || !message) {
+    const parsed = contactSchema.safeParse(body)
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Lütfen tüm zorunlu alanları doldurun' },
+        { error: 'Lütfen tüm zorunlu alanları doğru şekilde doldurun' },
         { status: 400 }
       )
     }
+    const { name, email, phone, message } = parsed.data
 
     const emailSubject = `Yeni İletişim Mesajı - ${name}`
     const emailHtml = `

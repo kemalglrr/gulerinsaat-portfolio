@@ -92,7 +92,7 @@ export default function Contact() {
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-orange-600 rounded-lg">
+                    <div className="p-3 bg-orange-500 rounded-lg">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -104,7 +104,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-orange-600 rounded-lg">
+                    <div className="p-3 bg-orange-500 rounded-lg">
                       <Mail className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -116,7 +116,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="flex items-start gap-4">
-                    <div className="p-3 bg-orange-600 rounded-lg">
+                    <div className="p-3 bg-orange-500 rounded-lg">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div>
@@ -144,7 +144,7 @@ export default function Contact() {
                   <input
                     {...register('name')}
                     type="text"
-                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     placeholder="Adınız Soyadınız"
                   />
                   {errors.name && (
@@ -159,7 +159,7 @@ export default function Contact() {
                   <input
                     {...register('email')}
                     type="email"
-                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     placeholder="ornek@email.com"
                   />
                   {errors.email && (
@@ -174,7 +174,7 @@ export default function Contact() {
                   <input
                     {...register('phone')}
                     type="tel"
-                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                     placeholder="0555 123 4567"
                   />
                 </div>
@@ -185,7 +185,7 @@ export default function Contact() {
                   </label>
                   <textarea
                     {...register('message')}
-                    className="w-full flex-1 px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:border-transparent transition-all resize-none"
+                    className="w-full flex-1 px-4 py-3 bg-gray-50 border border-slate-300 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all resize-none"
                     placeholder="Mesajınızı buraya yazın..."
                   />
                   {errors.message && (
@@ -196,7 +196,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg text-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-lg text-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>

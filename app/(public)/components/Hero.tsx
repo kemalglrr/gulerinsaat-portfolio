@@ -15,7 +15,7 @@ export default function Hero() {
             </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 tracking-tight text-gray-900">
               Profesyonel İnşaat,<br />
-              <span className="text-orange-600">Güvenilir</span> Çözümler
+              <span className="text-orange-500">Güvenilir</span> Çözümler
             </h1>
           </div>
           
@@ -46,42 +46,42 @@ export default function Hero() {
             {/* Feature Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white border border-gray-200 rounded-2xl p-8">
-                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center mb-6">
-                  <Users2 className="w-8 h-8 text-orange-600" />
+                <div className="w-14 h-14 rounded-xl bg-orange-50 flex items-center justify-center mb-6">
+                  <Users2 className="w-8 h-8 text-orange-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Profesyonel Ekip</h3>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Deneyimli uzman kadro</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Sürekli eğitim ve gelişim</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Modern ekipman</span>
                   </li>
                 </ul>
               </div>
               
               <div className="bg-white border border-gray-200 rounded-2xl p-8">
-                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center mb-6">
-                  <Zap className="w-8 h-8 text-orange-600" />
+                <div className="w-14 h-14 rounded-xl bg-orange-50 flex items-center justify-center mb-6">
+                  <Zap className="w-8 h-8 text-orange-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Hızlı & Kaliteli</h3>
                 <ul className="space-y-3 text-gray-600">
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Zamanında teslimat garantisi</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Kaliteli malzeme kullanımı</span>
                   </li>
                   <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-orange-600" />
+                    <span className="w-2 h-2 rounded-full bg-orange-500" />
                     <span>Titiz kalite kontrol</span>
                   </li>
                 </ul>
@@ -92,17 +92,17 @@ export default function Hero() {
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center">
-              <div className="text-5xl md:text-6xl font-bold text-orange-600 mb-2">150+</div>
+              <div className="text-5xl md:text-6xl font-bold text-orange-500 mb-2">150+</div>
               <div className="text-gray-700 text-lg">Tamamlanan Proje</div>
             </div>
             
             <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center">
-              <div className="text-5xl md:text-6xl font-bold text-orange-600 mb-2">30+</div>
+              <div className="text-5xl md:text-6xl font-bold text-orange-500 mb-2">30+</div>
               <div className="text-gray-700 text-lg">Yıllık Deneyim</div>
             </div>
             
             <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 text-center">
-              <div className="text-5xl md:text-6xl font-bold text-orange-600 mb-2">500+</div>
+              <div className="text-5xl md:text-6xl font-bold text-orange-500 mb-2">500+</div>
               <div className="text-gray-700 text-lg">Mutlu Müşteri</div>
             </div>
           </div>

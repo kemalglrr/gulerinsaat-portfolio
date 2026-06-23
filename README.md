@@ -2,112 +2,68 @@
 
 Profesyonel inşaat ve taşeronluk hizmetleri portföy websitesi.
 
-## 🚀 Teknolojiler
+## Teknolojiler
 
-- **Frontend:** Next.js 16 (App Router), React 19, TypeScript
+- **Framework:** Next.js 16 (App Router), React 19, TypeScript
 - **Styling:** Tailwind CSS 4
-- **Backend:** Supabase (PostgreSQL, Storage, Auth)
-- **UI Bileşenleri:** Lucide React, Yet Another React Lightbox
-- **Form Yönetimi:** React Hook Form + Zod
-- **Drag & Drop:** @dnd-kit
-- **Image Processing:** heic2any (HEIC to JPEG conversion)
+- **Storage:** Cloudflare R2 (medya), statik JSON (proje verisi)
+- **Mail:** Resend (iletişim formu)
+- **Hosting:** Vercel
+- **Form:** React Hook Form + Zod
 
-## ✨ Özellikler
+## Mimari
 
-### Frontend (Public)
-- 🏠 Modern ve responsive ana sayfa
-- 📋 Hakkımızda bölümü
-- 🏗️ Dinamik proje galerisi (fotoğraf ve video desteği)
-- 📞 İletişim formu
-- 📱 Mobil uyumlu tasarım
-- 🎨 Corporate orange & gray teması
+- Proje verisi `data/projects.json` dosyasında (build-time'da yüklenir).
+- Foto ve video Cloudflare R2'de; URL'ler `NEXT_PUBLIC_R2_URL` env'inden üretilir.
+- İletişim formu mesajları DB'ye yazılmaz; doğrudan Resend ile maile gider.
 
-### Admin Panel
-- 🔐 Güvenli giriş sistemi (Supabase Auth)
-- ➕ Proje ekleme, düzenleme, silme
-- 📸 Sürükle-bırak ile medya yükleme (HEIC, JPG, PNG, MP4, MOV, M4V)
-- 🔄 Proje sıralaması (drag & drop)
-- 👁️ Yayınlama/Taslak durumu
-- 🖼️ Otomatik kapak fotoğrafı seçimi
-- 📊 İstatistikler (toplam proje, yayınlanan)
+## Kurulum
 
-## 📦 Kurulum
-
-1. Depoyu klonlayın:
 ```bash
-git clone https://github.com/YOUR_USERNAME/gulerinsaat.org.git
+git clone <repo-url>
 cd gulerinsaat.org
-```
-
-2. Bağımlılıkları yükleyin:
-```bash
 npm install
 ```
 
-3. Çevre değişkenlerini ayarlayın:
-`.env.local` dosyası oluşturun ve aşağıdaki değişkenleri ekleyin:
+`.env.local` oluştur:
+
 ```env
-NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+NEXT_PUBLIC_R2_URL=https://media.gulerinsaat.org
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
+RESEND_API_KEY=re_xxx
 ```
 
-4. Supabase veritabanını kurun:
-`SUPABASE_SETUP.md` dosyasındaki talimatları takip edin.
-
-5. Development sunucusunu başlatın:
 ```bash
 npm run dev
 ```
 
-Site http://localhost:3000 adresinde çalışacak.
+Site http://localhost:3000 adresinde çalışır.
 
-## 🏗️ Build & Deploy
+## Build & Deploy
 
-### Production Build
 ```bash
 npm run build
 npm start
 ```
 
-### Vercel'e Deploy
-1. Projeyi GitHub'a push edin
-2. [Vercel Dashboard](https://vercel.com/new)'a gidin
-3. Repository'yi import edin
-4. Environment variables ekleyin
-5. Deploy edin
+Vercel'e push edildiğinde auto-deploy tetiklenir. Production env'leri Vercel dashboard'da yönetilir.
 
-## 📁 Proje Yapısı
+## Proje Yapısı
 
 ```
 ├── app/
-│   ├── (public)/          # Ana site (frontend)
-│   │   └── components/    # Public bileşenler
-│   ├── admin/             # Admin panel
-│   │   ├── login/         # Giriş sayfası
-│   │   └── dashboard/     # Dashboard ve proje yönetimi
-│   ├── api/               # API routes
-│   └── layout.tsx         # Root layout
+│   ├── (public)/components/   # Ana site bileşenleri
+│   ├── api/contact/            # İletişim formu API
+│   └── layout.tsx
+├── data/projects.json          # Proje verisi (kaynak)
 ├── lib/
-│   ├── supabase/          # Supabase client & server
-│   ├── types/             # TypeScript type tanımları
-│   └── utils/             # Utility fonksiyonlar
-└── public/                # Statik dosyalar (logo, favicon)
+│   ├── projects.ts             # JSON → ProjectWithMedia
+│   ├── types/                  # TS tipleri
+│   └── utils.ts                # Helper fonksiyonlar
+└── public/                     # Statik dosyalar
 ```
 
-## 🔒 Güvenlik
-
-- Admin paneli Supabase Auth ile korumalı
-- RLS (Row Level Security) politikaları aktif
-- Service Role Key sadece server-side kullanılıyor
-- .env dosyaları Git'e commit edilmiyor
-
-## 📝 Lisans
-
-Private project - Güler Yapı Proje © 2025
-
-## 🤝 İletişim
+## İletişim
 
 - **Website:** [gulerinsaat.org](https://gulerinsaat.org)
 - **Email:** guleryapiproje@gmail.com

@@ -44,14 +44,14 @@ export default function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="px-6 py-2 text-gray-600 hover:text-orange-600 rounded-lg font-medium transition-all duration-200"
+                className="px-6 py-2 text-gray-600 hover:text-orange-500 rounded-lg font-medium transition-all duration-200"
               >
                 {item.label}
               </button>
             ))}
             <button
               onClick={() => scrollToSection('iletisim')}
-              className="ml-2 px-6 py-2.5 text-gray-600 hover:text-orange-600 font-semibold transition-all duration-200"
+              className="ml-2 px-6 py-2.5 text-gray-600 hover:text-orange-500 font-semibold transition-all duration-200"
             >
               Teklif Alın
             </button>
@@ -79,14 +79,14 @@ export default function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-3 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg font-medium transition-all"
+                className="block w-full text-left px-4 py-3 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg font-medium transition-all"
               >
                 {item.label}
               </button>
             ))}
             <button
               onClick={() => scrollToSection('iletisim')}
-              className="block w-full text-left px-4 py-3 text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded-lg font-semibold transition-all"
+              className="block w-full text-left px-4 py-3 text-gray-600 hover:text-orange-500 hover:bg-orange-50 rounded-lg font-semibold transition-all"
             >
               Teklif Alın
             </button>

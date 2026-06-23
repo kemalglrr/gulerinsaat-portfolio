@@ -1,6 +1,7 @@
 'use client'
 
 import { ProjectWithMedia } from '@/lib/types/database'
+import { getProjectDuration } from '@/lib/utils'
 import { X, MapPin, Calendar } from 'lucide-react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
@@ -22,6 +23,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !lightboxOpen) onClose()
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [onClose, lightboxOpen])
+
   const images = project.media?.filter(m => m.media_type === 'image') || []
   const videos = project.media?.filter(m => m.media_type === 'video') || []
 
@@ -35,45 +44,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
     setLightboxOpen(true)
   }
 
-  // Proje süresini hesapla
-  const getProjectDuration = () => {
-    if (!project.start_date) return null
-    
-    const startDate = new Date(project.start_date)
-    const endDate = project.end_date ? new Date(project.end_date) : new Date() // Devam ediyorsa bugüne kadar
-    
-    // Toplam gün farkı
-    const totalDays = Math.floor((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
-    
-    // Yıl, ay, gün hesaplama
-    const years = Math.floor(totalDays / 365)
-    const remainingDaysAfterYears = totalDays % 365
-    const months = Math.floor(remainingDaysAfterYears / 30)
-    const days = remainingDaysAfterYears % 30
-    
-    // Devam ediyor mu yoksa tamamlandı mı?
-    const isCompleted = !!project.end_date
-    
-    let durationText = ''
-    
-    if (isCompleted) {
-      // Tamamlanan projeler: "X yıl Y ay Z gün sürede tamamlandı"
-      if (years > 0) durationText += `${years} yıl `
-      if (months > 0) durationText += `${months} ay `
-      if (days > 0) durationText += `${days} gün `
-      durationText += 'sürede tamamlandı'
-    } else {
-      // Devam eden projeler: "X yıl Y ay Z gündür devam ediyor"
-      if (years > 0) durationText += `${years} yıl `
-      if (months > 0) durationText += `${months} ay `
-      if (days > 0) durationText += `${days} gündür `
-      durationText += 'devam ediyor'
-    }
-    
-    return durationText.trim()
-  }
-
-  const projectDuration = getProjectDuration()
+  const projectDuration = getProjectDuration(project.start_date, project.end_date)
 
   return (
     <>
@@ -139,18 +110,19 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                 <h3 className="text-xl font-semibold text-slate-900 mb-4">
                   Fotoğraflar ({images.length})
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {images.map((image, index) => (
                     <div
                       key={image.id}
-                      className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg"
+                      className="relative aspect-[4/3] cursor-pointer group overflow-hidden rounded-lg bg-slate-100"
                       onClick={() => handleImageClick(index)}
                     >
                       <Image
                         src={image.public_url}
                         alt={`${project.title} - ${index + 1}`}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                        sizes="(max-width: 768px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                     </div>
@@ -196,6 +168,26 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           slides={lightboxSlides}
           index={lightboxIndex}
           plugins={[Zoom]}
+          render={{
+            slide: ({ slide, rect }) => (
+              <div
+                style={{
+                  position: 'relative',
+                  width: rect.width,
+                  height: rect.height,
+                }}
+              >
+                <Image
+                  src={slide.src}
+                  alt={slide.alt ?? ''}
+                  fill
+                  sizes="100vw"
+                  style={{ objectFit: 'contain' }}
+                  priority
+                />
+              </div>
+            ),
+          }}
           zoom={{
             maxZoomPixelRatio: 3,
             zoomInMultiplier: 2,

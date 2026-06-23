@@ -33,10 +33,7 @@ export function getProjects(): ProjectWithMedia[] {
       media_type: m.type as 'image' | 'video',
       storage_path: m.path,
       public_url: mediaUrl(m.type, m.path),
-      thumbnail_url: null,
-      file_size: null,
       display_order: m.displayOrder,
-      created_at: '',
     }))
     const firstImage = media.find((m) => m.media_type === 'image') ?? media[0]
 
@@ -48,11 +45,7 @@ export function getProjects(): ProjectWithMedia[] {
       start_date: p.startDate,
       end_date: p.endDate,
       display_order: p.displayOrder,
-      is_published: true,
-      created_at: '',
-      updated_at: '',
       media,
-      media_count: media.length,
       thumbnail: firstImage?.public_url,
     }
   })
