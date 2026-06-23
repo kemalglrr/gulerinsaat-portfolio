@@ -5,9 +5,15 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'rwgnrgrvlwphkogvbvti.supabase.co',
+        hostname: 'pub-85839c37d61540a4bac58f227b9f18ae.r2.dev',
         port: '',
-        pathname: '/storage/v1/object/public/**',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.gulerinsaat.org',
+        port: '',
+        pathname: '/**',
       },
     ],
     formats: ['image/webp', 'image/avif'],

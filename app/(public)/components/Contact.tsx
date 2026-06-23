@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
@@ -19,8 +18,7 @@ type ContactFormData = z.infer<typeof contactSchema>
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const supabase = createClient()
-  
+
   const {
     register,
     handleSubmit,

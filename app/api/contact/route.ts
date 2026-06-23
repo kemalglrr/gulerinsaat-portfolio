@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
 import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: NextRequest) {
   try {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+      console.error('RESEND_API_KEY tanımlı değil')
+      return NextResponse.json(
+        { error: 'Mail servisi yapılandırılmamış' },
+        { status: 500 }
+      )
+    }
+    const resend = new Resend(apiKey)
+
     const body = await request.json()
     const { name, email, phone, message } = body
 
-    // Validate input
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: 'Lütfen tüm zorunlu alanları doldurun' },
@@ -17,33 +23,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save to database
-    const supabase = await createClient()
-    
-    const { error: dbError } = await supabase
-      .from('contact_messages')
-      .insert([{
-        name,
-        email,
-        phone,
-        message
-      }])
-
-    if (dbError) {
-      console.error('Database error:', dbError)
-      return NextResponse.json(
-        { error: 'Mesaj kaydedilirken bir hata oluştu' },
-        { status: 500 }
-      )
-    }
-
-    // Send email notification
     const emailSubject = `Yeni İletişim Mesajı - ${name}`
     const emailHtml = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #EA580C;">Yeni İletişim Formu Mesajı</h2>
         <p>Aşağıdaki bilgilerle yeni bir mesaj aldınız:</p>
-        
+
         <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
           <tr>
             <td style="padding: 10px; border: 1px solid #ddd; background: #f9fafb; font-weight: bold;">Ad Soyad</td>
@@ -69,24 +54,22 @@ export async function POST(request: NextRequest) {
       </div>
     `
 
-    try {
-      // Send email via Resend
-      const { data: emailData, error: emailError } = await resend.emails.send({
-        from: 'Güler Yapı Proje <noreply@gulerinsaat.org>', // Domain doğrulandıktan sonra kullanılacak
-        to: 'guleryapiproje@gmail.com',
-        subject: emailSubject,
-        html: emailHtml,
-      })
+    const { error: emailError } = await resend.emails.send({
+      from: 'Güler Yapı Proje <noreply@send.gulerinsaat.org>',
+      to: 'guleryapiproje@gmail.com',
+      replyTo: email,
+      subject: emailSubject,
+      html: emailHtml,
+    })
 
-      if (emailError) {
-        console.error('Resend error:', emailError)
-        // Don't fail the request if email fails, but log it
-      }
-    } catch (emailError) {
-      console.error('Error sending email:', emailError)
-      // Don't fail the request if email fails
+    if (emailError) {
+      console.error('Resend error:', emailError)
+      return NextResponse.json(
+        { error: 'Mesaj gönderilirken bir hata oluştu' },
+        { status: 500 }
+      )
     }
-    
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Contact form error:', error)
