@@ -146,6 +146,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                       <video
                         src={video.public_url}
                         controls
+                        preload="metadata"
+                        playsInline
                         className="w-full h-full object-contain"
                         poster={video.thumbnail_url || undefined}
                       >

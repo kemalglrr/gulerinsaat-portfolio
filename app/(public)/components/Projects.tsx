@@ -32,10 +32,7 @@ export default function Projects() {
         <div className="container mx-auto">
           {/* Başlık */}
           <div className="text-center mb-16">
-            <div className="inline-block mb-10 px-4 py-2 bg-orange-50 border-2 border-black rounded-full">
-              <span className="text-gray-700 font-semibold text-sm tracking-wider">PORTFÖYÜMÜZ</span>
-            </div>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-6 tracking-tight">
               Projeler
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">

@@ -62,8 +62,8 @@ export default function Contact() {
       <div className="container mx-auto relative z-10">
         {/* Başlık */}
         <div className="text-center mb-16">
-          <div className="inline-block mb-10 px-4 py-2 bg-orange-50 border-2 border-black rounded-full">
-            <span className="text-gray-700 font-semibold text-sm tracking-wider">BİZE ULAŞIN</span>
+          <div className="inline-block mb-10 px-4 py-1.5 bg-orange-50 rounded-full">
+            <span className="text-orange-700 font-semibold text-xs tracking-[0.2em]">BİZE ULAŞIN</span>
           </div>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 tracking-tight">
             Teklif Alın
