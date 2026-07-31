@@ -1,6 +1,8 @@
 # Güler Yapı Proje
 
-Profesyonel inşaat ve taşeronluk hizmetleri portföy websitesi.
+Bir inşaat/taşeronluk firması için geliştirdiğim, canlıda yayında olan kurumsal web sitesi: [gulerinsaat.org](https://gulerinsaat.org)
+
+Proje portföyü, iletişim formu ve medya galerisi içeriyor.
 
 ## Teknolojiler
 
